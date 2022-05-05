@@ -1,0 +1,194 @@
+<div>
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Выберете приложение:</mat-label>
+      <mat-select [(ngModel)]="appName" (ngModelChange) = "changeApp()">
+        <mat-option *ngFor="let app of appList" [value]="app">
+          {{app}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button (click) = "changeMode()">Сменить режим</button>
+    <p>Текущий режим: {{modeWork}}</p>
+  </div>
+</div>
+<div>
+  <div>
+    <h2>Основная информация о приложении</h2>
+    <table border="1px">
+      <tr>
+        <td>Описание</td>
+        <td width="600px">{{description}}</td>
+      </tr>
+      <tr>
+        <td>Основание проведения работ</td>
+        <td>{{reason}}</td>
+      </tr>
+      <tr>
+        <td>Ответственный</td>
+        <td>{{responsible}}</td>
+      </tr>
+      <tr>
+        <td>Сокращенное наименование приложения</td>
+        <td>{{shortNameRus}}</td>
+      </tr>
+      <tr>
+        <td>Транслитерация сокращенного наименования</td>
+        <td>{{shortName}}</td>
+      </tr>
+      <tr>
+        <td>IT-лидер</td>
+        <td>{{itLeader}}</td>
+      </tr>
+      <tr>
+        <td>Релиз менеджер</td>
+        <td>{{releaseManager}}</td>
+      </tr>
+      <tr>
+        <td>Руководитель разработки</td>
+        <td>{{devLeader}}</td>
+      </tr>
+      <tr>
+        <td>Разработчики</td>
+        <td>{{developers}}</td>
+      </tr>
+      <tr>
+        <td>Тестировщики</td>
+        <td>{{testers}}</td>
+      </tr>
+      <tr>
+        <td>Бизнес роли:</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Выбрать компоненты, используемые Приложением</td>
+        <td>
+            <mat-checkbox [(ngModel)] = "IPC" [disabled] = "pDisabled">Informatica IPC</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Spark" [disabled] = "pDisabled">Spark</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "HDFS" [disabled] = "pDisabled">HDFS</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Impala" [disabled] = "pDisabled">Impala</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Oracle" [disabled] = "pDisabled">Oracle</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Cognos" [disabled] = "pDisabled">Cognos</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Tableau" [disabled] = "pDisabled">Tableau</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "GitLab" [disabled] = "pDisabled">GitLab</mat-checkbox>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <h2>Размещение данных</h2>
+    <h3>Табличные просранства Oracle</h3>
+      <mat-table [dataSource]="tableSpaces" class="mat-elevation-z8">
+    
+        <ng-container matColumnDef="instance">
+          <th mat-header-cell *matHeaderCellDef> Инстанс </th>
+          <td mat-cell *matCellDef="let element"> {{element.instance}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="tbsName">
+          <th mat-header-cell *matHeaderCellDef> Наименование </th>
+          <td mat-cell *matCellDef="let element"> {{element.tbsName}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="dateReq">
+          <th mat-header-cell *matHeaderCellDef> Дата заявки </th>
+          <td mat-cell *matCellDef="let element"> {{element.dateReq}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sizeFirst">
+          <th mat-header-cell *matHeaderCellDef> Первоначальный объем табличного пространства </th>
+          <td mat-cell *matCellDef="let element"> {{element.sizeFirst}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="sizeInc">
+          <th mat-header-cell *matHeaderCellDef> Инкремент (ежегодный) </th>
+          <td mat-cell *matCellDef="let element"> {{element.sizeInc}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="sizeNowCalc">
+          <th mat-header-cell *matHeaderCellDef> Текущий объем рассчетный </th>
+          <td mat-cell *matCellDef="let element"> {{element.sizeNowCalc}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sizeNowFactZT">
+          <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗТ) </th>
+          <td mat-cell *matCellDef="let element"> {{element.sizeNowFactZT}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sizeNowFactZPE">
+          <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗПЭ) </th>
+          <td mat-cell *matCellDef="let element"> {{element.sizeNowFactZPE}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tbsDisplayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tbsDisplayedColumns;"></tr>
+      </mat-table>
+    <h3>Схемы Oracle</h3>
+    <mat-table [dataSource]="schemaOracle" class="mat-elevation-z8">
+    
+      <ng-container matColumnDef="instance">
+        <th mat-header-cell *matHeaderCellDef> Инстанс </th>
+        <td mat-cell *matCellDef="let element"> {{element.instance}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="schNameOracle">
+        <th mat-header-cell *matHeaderCellDef> Наименование без префикса</th>
+        <td mat-cell *matCellDef="let element"> {{element.schNameOracle}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="schPrivilegies">
+        <th mat-header-cell *matHeaderCellDef> Привилегии схемы </th>
+        <td mat-cell *matCellDef="let element"> {{element.schPrivilegies}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ztSchName">
+        <th mat-header-cell *matHeaderCellDef> Наименование схемы в ЗТ </th>
+        <td mat-cell *matCellDef="let element"> {{element.ztSchName}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="zpeSchName">
+        <th mat-header-cell *matHeaderCellDef> Наименование схемы в ЗПЭ </th>
+        <td mat-cell *matCellDef="let element"> {{element.zpeSchName}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="schOracleDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: schOracleDisplayedColumns;"></tr>
+    </mat-table>
+    <h3>Связи табличные просранства и схемы Oracle</h3>
+    <mat-table [dataSource]="schOracleLnkTbs" class="mat-elevation-z8">
+    
+      <ng-container matColumnDef="instance">
+        <th mat-header-cell *matHeaderCellDef> Инстанс </th>
+        <td mat-cell *matCellDef="let element"> {{element.instance}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="schNameOracle">
+        <th mat-header-cell *matHeaderCellDef> Наименование схемы</th>
+        <td mat-cell *matCellDef="let element"> {{element.schNameOracle}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="tbsName">
+        <th mat-header-cell *matHeaderCellDef> Наименование табличного пространства</th>
+        <td mat-cell *matCellDef="let element"> {{element.tbsName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quota">
+        <th mat-header-cell *matHeaderCellDef> Квота (0 - unlimited) </th>
+        <td mat-cell *matCellDef="let element"> {{element.quota}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="defaultTbs">
+        <th mat-header-cell *matHeaderCellDef> Призная является ли данное табличное просрантсво - просранством по умоланию </th>
+        <td mat-cell *matCellDef="let element"> {{element.defaultTbs}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="schOracleLnkTbsDisplayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: schOracleLnkTbsDisplayedColumns;"></tr>
+    </mat-table>
+  </div>
+
+</div>
+
+<!-- <button (click) = "changeSize()">Add</button>  -->

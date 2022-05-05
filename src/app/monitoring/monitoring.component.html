@@ -1,0 +1,64 @@
+<div class = "monCompHead">
+    <div class = "monCompChoise">
+        <mat-form-field appearance="fill">
+            <mat-label>Выберете приложение:</mat-label>
+            <mat-select [(ngModel)]="appName" (ngModelChange) = "changeApps()" >
+                <mat-option *ngFor="let app of appNameList" [value]="app">
+                {{app}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class = "monCompChoise">
+        <mat-form-field appearance="fill">
+            <mat-label>Выберете зону:</mat-label>
+            <mat-select [(ngModel)]="zoneName" (ngModelChange) = "changeZone()" (ng-disabled)="zoneDisable">
+                <mat-option *ngFor="let zone of zoneNameList" [value]="zone">
+                {{zone}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class = "monCompChoise">
+        <mat-form-field appearance="fill">
+            <mat-label>Выберете инстанс:</mat-label>
+            <mat-select [(ngModel)]="instName" (ngModelChange) = "changeInstance()" (ng-disabled)="instDisable">
+                <mat-option *ngFor="let inst of instNameList" [value]="inst">
+                {{inst}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>
+<div>
+    <mat-grid-list cols="2" rowHeight="350px">
+        <mat-grid-tile
+            *ngFor="let tile of tiles">
+            <div>
+                <div class = "monHeaderGraph">Instanse: {{tile.instanse}} </div>
+                <div>
+                    <ngx-charts-line-chart
+                        [view]="view"
+                        [legend]="legend"
+                        [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel"
+                        [xAxis]="xAxis"
+                        [yAxis]="yAxis"
+                        [xAxisLabel]="xAxisLabel"
+                        [yAxisLabel]="yAxisLabel"
+                        [timeline]="timeline"
+                        [results]="tile.data"
+                        [autoScale]="autoScale"
+                        (select)="onSelect($event)"
+                        (activate)="onActivate($event)"
+                        (deactivate)="onDeactivate($event)"
+                        >
+                    </ngx-charts-line-chart>
+                </div>
+            </div>
+            <!--[scheme]="colorScheme"-->
+        </mat-grid-tile>
+      </mat-grid-list>
+</div>
+
+
