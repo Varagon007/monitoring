@@ -44,6 +44,8 @@ export class RequestsComponent implements OnInit {
   schOracleLnkTbsDisplayedColumns: string[] = ['instance', 'schNameOracle', 'tbsName', 'quota', 'defaultTbs'];
   schOracleLnkTbs = [];
 
+  innerDisplayedColumns: string[] = ['schPrivilegies'];
+
   ngOnInit(): void {
     this.appList = data.appNameReq.sort();
     // this.tableSpaces = [{instance: "DM", tbsName: "EHD_TS_DM_PAO", dateReq: "2021", sizeFirst: 90, sizeInc: 9, sizeNowCalc: 99, sizeNowFactZT: 0, sizeNowFactZPE: 443.43}];

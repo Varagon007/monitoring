@@ -141,7 +141,11 @@
       <ng-container matColumnDef="schPrivilegies">
         <th mat-header-cell *matHeaderCellDef width="10%"> Привилегии схемы </th>
         <td mat-cell *matCellDef="let element">
-          {{element.schPrivilegies[0]}}
+          <ul *ngFor="let schPrivilegie of element.schPrivilegies">
+            <li>
+              {{schPrivilegie}}
+            </li>
+          </ul>
         </td>
       </ng-container>
 
@@ -192,5 +196,3 @@
   </div>
 
 </div>
-
-<!-- <button (click) = "changeSize()">Add</button>  -->
