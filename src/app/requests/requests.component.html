@@ -83,41 +83,41 @@
       <mat-table [dataSource]="tableSpaces" class="mat-elevation-z8">
     
         <ng-container matColumnDef="instance">
-          <th mat-header-cell *matHeaderCellDef> Инстанс </th>
+          <th mat-header-cell *matHeaderCellDef width="10%"> Инстанс </th>
           <td mat-cell *matCellDef="let element"> {{element.instance}} </td>
         </ng-container>
       
         <ng-container matColumnDef="tbsName">
-          <th mat-header-cell *matHeaderCellDef> Наименование </th>
+          <th mat-header-cell *matHeaderCellDef width="10%"> Наименование </th>
           <td mat-cell *matCellDef="let element"> {{element.tbsName}} </td>
         </ng-container>
       
         <ng-container matColumnDef="dateReq">
-          <th mat-header-cell *matHeaderCellDef> Дата заявки </th>
+          <th mat-header-cell *matHeaderCellDef width="10%"> Дата заявки </th>
           <td mat-cell *matCellDef="let element"> {{element.dateReq}} </td>
         </ng-container>
 
         <ng-container matColumnDef="sizeFirst">
-          <th mat-header-cell *matHeaderCellDef> Первоначальный объем табличного пространства </th>
+          <th mat-header-cell *matHeaderCellDef width="10%"> Первоначальный объем табличного пространства </th>
           <td mat-cell *matCellDef="let element"> {{element.sizeFirst}} </td>
         </ng-container>
       
         <ng-container matColumnDef="sizeInc">
-          <th mat-header-cell *matHeaderCellDef> Инкремент (ежегодный) </th>
+          <th mat-header-cell *matHeaderCellDef width="10%"> Инкремент (ежегодный) </th>
           <td mat-cell *matCellDef="let element"> {{element.sizeInc}} </td>
         </ng-container>
       
-        <ng-container matColumnDef="sizeNowCalc">
+        <ng-container matColumnDef="sizeNowCalc" width="10%">
           <th mat-header-cell *matHeaderCellDef> Текущий объем рассчетный </th>
           <td mat-cell *matCellDef="let element"> {{element.sizeNowCalc}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="sizeNowFactZT">
+        <ng-container matColumnDef="sizeNowFactZT" width="10%">
           <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗТ) </th>
           <td mat-cell *matCellDef="let element"> {{element.sizeNowFactZT}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="sizeNowFactZPE">
+        <ng-container matColumnDef="sizeNowFactZPE" width="10%">
           <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗПЭ) </th>
           <td mat-cell *matCellDef="let element"> {{element.sizeNowFactZPE}} </td>
         </ng-container>
@@ -129,27 +129,29 @@
     <mat-table [dataSource]="schemaOracle" class="mat-elevation-z8">
     
       <ng-container matColumnDef="instance">
-        <th mat-header-cell *matHeaderCellDef> Инстанс </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Инстанс </th>
         <td mat-cell *matCellDef="let element"> {{element.instance}} </td>
       </ng-container>
     
       <ng-container matColumnDef="schNameOracle">
-        <th mat-header-cell *matHeaderCellDef> Наименование без префикса</th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование без префикса</th>
         <td mat-cell *matCellDef="let element"> {{element.schNameOracle}} </td>
       </ng-container>
     
       <ng-container matColumnDef="schPrivilegies">
-        <th mat-header-cell *matHeaderCellDef> Привилегии схемы </th>
-        <td mat-cell *matCellDef="let element"> {{element.schPrivilegies}} </td>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Привилегии схемы </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.schPrivilegies[0]}}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="ztSchName">
-        <th mat-header-cell *matHeaderCellDef> Наименование схемы в ЗТ </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование схемы в ЗТ </th>
         <td mat-cell *matCellDef="let element"> {{element.ztSchName}} </td>
       </ng-container>
     
       <ng-container matColumnDef="zpeSchName">
-        <th mat-header-cell *matHeaderCellDef> Наименование схемы в ЗПЭ </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование схемы в ЗПЭ </th>
         <td mat-cell *matCellDef="let element"> {{element.zpeSchName}} </td>
       </ng-container>
 
@@ -160,27 +162,27 @@
     <mat-table [dataSource]="schOracleLnkTbs" class="mat-elevation-z8">
     
       <ng-container matColumnDef="instance">
-        <th mat-header-cell *matHeaderCellDef> Инстанс </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Инстанс </th>
         <td mat-cell *matCellDef="let element"> {{element.instance}} </td>
       </ng-container>
     
       <ng-container matColumnDef="schNameOracle">
-        <th mat-header-cell *matHeaderCellDef> Наименование схемы</th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование схемы</th>
         <td mat-cell *matCellDef="let element"> {{element.schNameOracle}} </td>
       </ng-container>
     
       <ng-container matColumnDef="tbsName">
-        <th mat-header-cell *matHeaderCellDef> Наименование табличного пространства</th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование табличного пространства</th>
         <td mat-cell *matCellDef="let element"> {{element.tbsName}} </td>
       </ng-container>
 
       <ng-container matColumnDef="quota">
-        <th mat-header-cell *matHeaderCellDef> Квота (0 - unlimited) </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Квота (0 - unlimited) </th>
         <td mat-cell *matCellDef="let element"> {{element.quota}} </td>
       </ng-container>
     
       <ng-container matColumnDef="defaultTbs">
-        <th mat-header-cell *matHeaderCellDef> Призная является ли данное табличное просрантсво - просранством по умоланию </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Призная является ли данное табличное просрантсво - просранством по умоланию </th>
         <td mat-cell *matCellDef="let element"> {{element.defaultTbs}} </td>
       </ng-container>
 
