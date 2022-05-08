@@ -25,7 +25,6 @@ export class RequestsComponent implements OnInit {
   developers: string = "";
   testers: string = "";
   modeWork: string = "просмотр";
-  pDisabled: string = "true";
   IPC: boolean = false;
   Spark: boolean = false;
   HDFS: boolean = false;
@@ -34,6 +33,7 @@ export class RequestsComponent implements OnInit {
   Cognos: boolean = false;
   Tableau: boolean = false;
   GitLab: boolean = false;
+  reqEditable: boolean = false;
 
   tbsDisplayedColumns: string[] = ['instance', 'tbsName', 'dateReq', 'sizeFirst', 'sizeInc', 'sizeNowCalc', 'sizeNowFactZT', 'sizeNowFactZPE'];
   tableSpaces = [];
@@ -45,6 +45,20 @@ export class RequestsComponent implements OnInit {
   schOracleLnkTbs = [];
 
   innerDisplayedColumns: string[] = ['schPrivilegies'];
+
+  grantList: string[] = [
+    "CREATE SESSION", 
+    "CREATE TABLE", 
+    "CREATE VIEW", 
+    "CREATE MATERIALIZED VIEW", 
+    "CREATE SEQUENCE", 
+    "CREATE SYNONYM", 
+    "CREATE PROCEDURE", 
+    "CREATE TRIGGER", 
+    "CREATE TYPE", 
+    "EXEMPT ACCESS POLICY",
+    "ROLE CONNECT",
+    "ROLE RESOURCE"];
 
   ngOnInit(): void {
     this.appList = data.appNameReq.sort();
@@ -58,7 +72,7 @@ export class RequestsComponent implements OnInit {
   }
 
   changeApp(){
-    if(this.appName != null){
+    if(this.appName != ""){
       this.description = data.appReq[this.appName]["description"];
       this.shortName = this.appName;
       this.reason = data.appReq[this.appName]["reason"];
@@ -80,11 +94,29 @@ export class RequestsComponent implements OnInit {
       this.tableSpaces = data.appReqTbs[this.appName];
       this.schemaOracle = data.appReqSch[this.appName];
       this.schOracleLnkTbs = data.appReqSchOraLnkTbs[this.appName];
+    }else{
+      this.reqEditable = false;
+      this.modeWork == "просмотр";
     }
   }
 
   changeMode(){
-    (this.modeWork == "просмотр")? this.modeWork = "редактирование" : this.modeWork = "просмотр";  
+    if(this.appName != ""){
+      (this.modeWork == "просмотр")? this.modeWork = "редактирование" : this.modeWork = "просмотр";
+      this.reqEditable = !this.reqEditable;
+    }  
+  }
+
+  saveBasic(){
+
+  }
+
+  scroll(el: HTMLElement) {
+    const id = 'profilePhoto';
+    const yOffset = -70; 
+    const element = document.getElementById(id);
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({top: y, behavior: 'smooth'});
   }
 
 }

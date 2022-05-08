@@ -5,3 +5,17 @@ ul {
     margin-left: 0; /* Отступ слева в браузере IE и Opera */
     padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
 }
+.header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    width: 100%;
+    height: 70px;
+}
+.inlineBlock{
+    display:inline-block;
+    margin-right: 10pt;
+}
+html {
+    scroll-behavior: smooth;
+}

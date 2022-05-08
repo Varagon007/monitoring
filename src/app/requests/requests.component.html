@@ -1,5 +1,5 @@
-<div>
-  <div>
+<div class = "header">
+  <div class = "inlineBlock">
     <mat-form-field appearance="fill">
       <mat-label>Выберете приложение:</mat-label>
       <mat-select [(ngModel)]="appName" (ngModelChange) = "changeApp()">
@@ -9,30 +9,56 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div>
+  <div class = "inlineBlock">
     <button (click) = "changeMode()">Сменить режим</button>
+  </div>
+  <div class = "inlineBlock">
     <p>Текущий режим: {{modeWork}}</p>
+  </div>
+  <div class = "inlineBlock">
+    <button (click)="scroll(BasicSection)">Основная информация о приложении</button>
+  </div>
+  <div class = "inlineBlock">
+    <button (click)="scroll(TableSpaceSection)">Табличные просранства Oracle</button>
+  </div>
+  <div class = "inlineBlock">
+    <button (click)="scroll(schemeOracleSection)">Схемы Oracle</button>
+  </div>
+  <div class = "inlineBlock">
+    <button (click)="scroll(linkSchemeOracleSection)">Связи схем Oracle и табличных просранства</button>
   </div>
 </div>
 <div>
-  <div>
+  <div #BasicSection>
     <h2>Основная информация о приложении</h2>
     <table border="1px">
       <tr>
         <td>Описание</td>
-        <td width="600px">{{description}}</td>
+        <td width="600px">
+          <div *ngIf="!reqEditable; else elseBlockDescriptionBasic">{{description}}</div>
+          <ng-template #elseBlockDescriptionBasic><input value = "{{description}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Основание проведения работ</td>
-        <td>{{reason}}</td>
+        <td>
+          <div *ngIf="!reqEditable; else elseBlockReasonBasic">{{reason}}</div>
+          <ng-template #elseBlockReasonBasic><input value = "{{reason}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Ответственный</td>
-        <td>{{responsible}}</td>
+        <td>
+          <div *ngIf="!reqEditable; else elseBlockResponsibleBasic">{{responsible}}</div>
+          <ng-template #elseBlockResponsibleBasic><input value = "{{responsible}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Сокращенное наименование приложения</td>
-        <td>{{shortNameRus}}</td>
+        <td>
+          <div *ngIf="!reqEditable; else elseBlockShortNameRusBasic">{{shortNameRus}}</div>
+          <ng-template #elseBlockShortNameRusBasic><input value = "{{shortNameRus}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Транслитерация сокращенного наименования</td>
@@ -40,23 +66,37 @@
       </tr>
       <tr>
         <td>IT-лидер</td>
-        <td>{{itLeader}}</td>
+        <td>
+          <div *ngIf="!reqEditable; else elseBlockItLeaderBasic">{{itLeader}}</div>
+          <ng-template #elseBlockItLeaderBasic><input value = "{{itLeader}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Релиз менеджер</td>
-        <td>{{releaseManager}}</td>
+        <td>
+          <div *ngIf="!reqEditable; else elseBlockReleaseManagerBasic">{{releaseManager}}</div>
+          <ng-template #elseBlockReleaseManagerBasic><input value = "{{releaseManager}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Руководитель разработки</td>
-        <td>{{devLeader}}</td>
+        <td><div *ngIf="!reqEditable; else elseBlockDevLeaderBasic">{{devLeader}}</div>
+          <ng-template #elseBlockDevLeaderBasic><input value = "{{devLeader}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Разработчики</td>
-        <td>{{developers}}</td>
+        <td>
+          <div *ngIf="!reqEditable; else elseBlockDevelopersBasic">{{developers}}</div>
+          <ng-template #elseBlockDevelopersBasic><input value = "{{developers}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Тестировщики</td>
-        <td>{{testers}}</td>
+        <td>
+          <div *ngIf="!reqEditable; else elseBlockTestersBasic">{{testers}}</div>
+          <ng-template #elseBlockTestersBasic><input value = "{{testers}}"></ng-template>
+        </td>
       </tr>
       <tr>
         <td>Бизнес роли:</td>
@@ -65,21 +105,28 @@
       <tr>
         <td>Выбрать компоненты, используемые Приложением</td>
         <td>
-            <mat-checkbox [(ngModel)] = "IPC" [disabled] = "pDisabled">Informatica IPC</mat-checkbox>
-            <mat-checkbox [(ngModel)] = "Spark" [disabled] = "pDisabled">Spark</mat-checkbox>
-            <mat-checkbox [(ngModel)] = "HDFS" [disabled] = "pDisabled">HDFS</mat-checkbox>
-            <mat-checkbox [(ngModel)] = "Impala" [disabled] = "pDisabled">Impala</mat-checkbox>
-            <mat-checkbox [(ngModel)] = "Oracle" [disabled] = "pDisabled">Oracle</mat-checkbox>
-            <mat-checkbox [(ngModel)] = "Cognos" [disabled] = "pDisabled">Cognos</mat-checkbox>
-            <mat-checkbox [(ngModel)] = "Tableau" [disabled] = "pDisabled">Tableau</mat-checkbox>
-            <mat-checkbox [(ngModel)] = "GitLab" [disabled] = "pDisabled">GitLab</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "IPC" [disabled] = "!reqEditable">Informatica IPC</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Spark" [disabled] = "!reqEditable">Spark</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "HDFS" [disabled] = "!reqEditable">HDFS</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Impala" [disabled] = "!reqEditable">Impala</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Oracle" [disabled] = "!reqEditable">Oracle</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Cognos" [disabled] = "!reqEditable">Cognos</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "Tableau" [disabled] = "!reqEditable">Tableau</mat-checkbox>
+            <mat-checkbox [(ngModel)] = "GitLab" [disabled] = "!reqEditable">GitLab</mat-checkbox>
         </td>
       </tr>
     </table>
+    <div *ngIf="reqEditable">
+      <button (click) = "saveBasic()">Сохранить основную информации и отправить на согласование</button>
+      <button (click) = "saveBasic()">Вернуть текущие значения</button>
+    </div>
   </div>
-  <div>
+  <div #TableSpaceSection>
     <h2>Размещение данных</h2>
     <h3>Табличные просранства Oracle</h3>
+    <div *ngIf="reqEditable">
+      <button (click) = "saveBasic()">Добавить новое табличное пространство</button>
+    </div>
       <mat-table [dataSource]="tableSpaces" class="mat-elevation-z8">
     
         <ng-container matColumnDef="instance">
@@ -99,12 +146,18 @@
 
         <ng-container matColumnDef="sizeFirst">
           <th mat-header-cell *matHeaderCellDef width="10%"> Первоначальный объем табличного пространства </th>
-          <td mat-cell *matCellDef="let element"> {{element.sizeFirst}} </td>
+          <td mat-cell *matCellDef="let element"> 
+            <div *ngIf="!reqEditable; else elseBlockTbsSizeFirst">{{element.sizeFirst}}</div>
+            <ng-template #elseBlockTbsSizeFirst><input value = "{{element.sizeFirst}}"></ng-template> 
+          </td>
         </ng-container>
       
         <ng-container matColumnDef="sizeInc">
           <th mat-header-cell *matHeaderCellDef width="10%"> Инкремент (ежегодный) </th>
-          <td mat-cell *matCellDef="let element"> {{element.sizeInc}} </td>
+          <td mat-cell *matCellDef="let element"> 
+            <div *ngIf="!reqEditable; else elseBlockSizeInc">{{element.sizeInc}}</div>
+            <ng-template #elseBlockSizeInc><input value = "{{element.sizeInc}}"></ng-template>
+          </td>
         </ng-container>
       
         <ng-container matColumnDef="sizeNowCalc" width="10%">
@@ -113,19 +166,28 @@
         </ng-container>
 
         <ng-container matColumnDef="sizeNowFactZT" width="10%">
-          <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗТ) </th>
+          <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗТ)(автоопределение) </th>
           <td mat-cell *matCellDef="let element"> {{element.sizeNowFactZT}} </td>
         </ng-container>
 
         <ng-container matColumnDef="sizeNowFactZPE" width="10%">
-          <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗПЭ) </th>
+          <th mat-header-cell *matHeaderCellDef> Текущий объем фактический (ЗПЭ)(автоопределение) </th>
           <td mat-cell *matCellDef="let element"> {{element.sizeNowFactZPE}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="tbsDisplayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: tbsDisplayedColumns;"></tr>
       </mat-table>
+  </div>  
+      <div *ngIf="reqEditable">
+        <button (click) = "saveBasic()">Сохранить табличные пространства и отправить на согласование</button>
+        <button (click) = "saveBasic()">Вернуть текущие значения</button>
+    </div>
+  <div #schemeOracleSection>
     <h3>Схемы Oracle</h3>
+    <div *ngIf="reqEditable">
+      <button (click) = "saveBasic()">Добавить новую схему Oracle</button>
+    </div>
     <mat-table [dataSource]="schemaOracle" class="mat-elevation-z8">
     
       <ng-container matColumnDef="instance">
@@ -143,26 +205,53 @@
         <td mat-cell *matCellDef="let element">
           <ul *ngFor="let schPrivilegie of element.schPrivilegies">
             <li>
-              {{schPrivilegie}}
+              <div>
+                <div>
+                  {{schPrivilegie}}
+                </div>
+                <div *ngIf="reqEditable">
+                  <button (click) = "saveBasic()">Удалить</button>
+                </div>
+              </div>
             </li>
           </ul>
+          <div *ngIf="reqEditable">
+            <mat-form-field appearance="fill">
+              <mat-label>Выберете привилегию:</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let grant of grantList" [value]="grant">
+                    {{grant}}
+                  </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button (click) = "saveBasic()">Добавить</button>
+          </div>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="ztSchName">
-        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование схемы в ЗТ </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование схемы в ЗТ (автоопределение)</th>
         <td mat-cell *matCellDef="let element"> {{element.ztSchName}} </td>
       </ng-container>
     
       <ng-container matColumnDef="zpeSchName">
-        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование схемы в ЗПЭ </th>
+        <th mat-header-cell *matHeaderCellDef width="10%"> Наименование схемы в ЗПЭ (автоопределение)</th>
         <td mat-cell *matCellDef="let element"> {{element.zpeSchName}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="schOracleDisplayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: schOracleDisplayedColumns;"></tr>
     </mat-table>
-    <h3>Связи табличные просранства и схемы Oracle</h3>
+  </div>  
+    <div *ngIf="reqEditable">
+      <button (click) = "saveBasic()">Сохранить схемы Oracle и отправить на согласование</button>
+      <button (click) = "saveBasic()">Вернуть текущие значения</button>
+    </div>
+  <div #linkSchemeOracleSection>
+    <h3>Связи схем Oracle и табличных просранства</h3>
+    <div *ngIf="reqEditable">
+      <button (click) = "saveBasic()">Добавить новую связь схемы Oracle к табличному пространству</button>
+    </div>
     <mat-table [dataSource]="schOracleLnkTbs" class="mat-elevation-z8">
     
       <ng-container matColumnDef="instance">
@@ -194,5 +283,8 @@
       <tr mat-row *matRowDef="let row; columns: schOracleLnkTbsDisplayedColumns;"></tr>
     </mat-table>
   </div>
-
+  <div *ngIf="reqEditable">
+    <button (click) = "saveBasic()">Сохранить связи табличных пространств и схем Oracle и отправить на согласование</button>
+    <button (click) = "saveBasic()">Вернуть текущие значения</button>
+  </div>
 </div>
