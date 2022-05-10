@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
 import * as data from '../data/data.const';
-
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-requests',
@@ -11,7 +11,8 @@ import * as data from '../data/data.const';
 
 export class RequestsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
   appName: string = "";
   appList: string[] = [];
   description: string = "";
@@ -34,6 +35,7 @@ export class RequestsComponent implements OnInit {
   Tableau: boolean = false;
   GitLab: boolean = false;
   reqEditable: boolean = false;
+  response: any;
 
   tbsDisplayedColumns: string[] = ['instance', 'tbsName', 'dateReq', 'sizeFirst', 'sizeInc', 'sizeNowCalc', 'sizeNowFactZT', 'sizeNowFactZPE'];
   tableSpaces = [];
@@ -62,13 +64,15 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit(): void {
     this.appList = data.appNameReq.sort();
-    // this.tableSpaces = [{instance: "DM", tbsName: "EHD_TS_DM_PAO", dateReq: "2021", sizeFirst: 90, sizeInc: 9, sizeNowCalc: 99, sizeNowFactZT: 0, sizeNowFactZPE: 443.43}];
-    //data.appReqTbs["ПАО"];
+    this.http.get('http://localhost:8080/ords/obe/appname/namelist').subscribe(
+      (response) => {
+        this.response = response;
+        console.log(this.response);
+      }
+    )
   }
 
   changeSize(){
-    //data.tableSpaceSize[0].env.ЗПЭ.instans.DM[0].sizeFirst = Number(data.tableSpaceSize[0].env.ЗПЭ.instans.DM[0].sizeFirst) + 1;
-    //this.tbsReq = Number(data.tableSpaceSize[0].env.ЗПЭ.instans.DM[0].sizeFirst);
   }
 
   changeApp(){
